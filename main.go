@@ -21,6 +21,10 @@ var albums = []album{
 	{ID: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
 }
 
+func getHome(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, gin.H{"message": "Home 😍 🥰 😘"})
+}
+
 // getAlbums responds with the list of all albums as JSON.
 func getAlbums(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, albums)
@@ -59,6 +63,7 @@ func getAlbumByID(c *gin.Context) {
 
 func main() {
 	router := gin.Default()
+	router.GET("/", getHome)
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
